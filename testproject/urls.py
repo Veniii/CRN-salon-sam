@@ -16,7 +16,24 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
+
+"""def trigger_error(request):
+    division_by_zero = 1 / 0"""
+
+def trigger_error(request):
+    my_list = [1, 2, 3]
+    print(my_list[5])
+
+#def dzielenie_przez_string(request):
+#    x = 2 / 'abc'
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-]
+    path('sentry-debug/', trigger_error),
+   # path('inne-typy/', dzielenie_przez_string),
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
